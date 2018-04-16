@@ -20,11 +20,16 @@ public:
 	// @post:   Initialized Node class
 	// @return  None
 	Node();
-
-	// @pre:    None
-	// @post:   Initialized Node class
-	// @return  None
-	Node(const int &rank, const int &key, Node *left , Node *right );
+    
+    // @pre:    None
+    // @post:   Initialized Node class
+    // @return  None
+    Node(const int &rank, const int &key, Node *left , Node *right );
+    
+    // @pre:    Heap
+    // @post:   Destructed heap
+    // @return  None
+    ~Node();
 
 	// @pre:    Node
 	// @post:   None
@@ -60,11 +65,16 @@ public:
 	// @post:   None
 	// @return  m_left
 	void setLeft (Node *left );
+    
+    // @pre:    Node
+    // @post:   None
+    // @return  m_right
+    void setRight (Node *right );
 
-	// @pre:    Node
-	// @post:   None
-	// @return  m_right
-	void setRight (Node *right );
+    // @pre:    Node
+    // @post:   Swapped right and left children
+    // @return  None
+    void swap ();
 
 };
 

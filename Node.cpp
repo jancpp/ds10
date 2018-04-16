@@ -6,7 +6,18 @@ Date:   4/9/2018
 
 #include "Node.h"
 
-Node::Node() : m_left (nullptr ), m_right (nullptr ) {
+Node::Node() : m_left (nullptr ), m_right (nullptr ){
+    this->setKey(-1);
+    this->setRank(1);
+}
+
+Node::~Node() {
+    if (right() != nullptr) {
+        delete right();
+    }
+    if (left() != nullptr) {
+        delete left();
+    }
 }
 
 Node::Node(const int &rank, const int &key, Node *left , Node *right ) {
@@ -25,7 +36,7 @@ int Node::rank() const {
 }
 
 void Node::setRank (const int &rank) {
-        m_rank = rank;
+    m_rank = rank;
 }
 
 void Node::setKey (const int &key) {
@@ -46,4 +57,10 @@ Node *Node::left () const {
 
 Node *Node::right () const {
         return m_right ;
+}
+
+void Node::swap() {
+    Node *temp = m_left;
+    m_left = m_right;
+    m_right = temp;
 }

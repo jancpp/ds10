@@ -10,6 +10,8 @@ Date:   4/9/2018
 
 #include "Node.h"
 #include <iostream>
+#include <queue>
+#include <math.h>
 
 class LeftistHeap {
 
@@ -17,52 +19,45 @@ private:
 	Node *m_root;
 	int m_size;
 
-	//    // @pre:    BST
-	//    // @post:   Node
-	//    // @return: Node pointer to left child
-	//    Node *getLeft(Node *root);
-	//
-	//    // @pre:    BST
-	//    // @post:   Node
-	//    // @return: Node pointer to right child
-	//    Node *getRight(Node *root);
-
 	bool deleteMinHelper(Node *parent);
 	bool deleteMaxHelper(Node *parent);
+    void swap(Node *heap1, Node *heap2);
+    void adjustRank(Node *heap);
+//    Node *concat(Node *heap1, Node *heap2);
 
 	void setRoot(Node *root);
 
-	// @pre:    BST
-	// @post:   inserting node in root
-	// @return: Node pointer of element to be inserted
-	Node *insertHelper(Node *root, Node *node);
+	// @pre:    Leftist heap
+	// @post:   Heaps merged into one
+	// @return: Node pointer of root of merged heaps
+    Node *concate(Node *heap1, Node *heap2);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   Printed values in preorder traversal
 	// @return: None
 	void preorderHelper(Node *root);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   Printed values in inorder traversal
 	// @return: None
 	void inorderHelper(Node *root);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   Printed values in postorder traversal
 	// @return: None
 	void levelorderHelper(Node *root);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   Serching in root
 	// @return: Node pointer of element to be found
 	Node *findMinHelper(Node *root);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   Searching in root
 	// @return: Node pointer of element to be found
 	Node *findMaxHelper(Node *root);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   deleted node from the Heap
 	// @return: True if deleted, false otherwise
 	bool deleteHelper(int value, Node *root);
@@ -78,23 +73,23 @@ public:
 	// @Return: True if success, false otherwise
 	bool insert(int value);
 
-	// @pre:    BST
+	// @pre:    Leftist heap
 	// @post:   deleted min value
 	// @return: True if deleted, false otherwise
 	bool deleteMin();
 
-	// @pre:    BST
-	// @post:   Printed out all the elements of the BST using preorder traversal.
+	// @pre:    Leftist heap
+	// @post:   Printed out all the elements of the Leftist heap using preorder traversal.
 	// @return: None
 	void preorder();
 
-	// @pre:    BST
-	// @post:   Printed out all the elements of the BST using inorder traversal.
+	// @pre:    Leftist heap
+	// @post:   Printed out all the elements of the Leftist heap using inorder traversal.
 	// @return: None
 	void inorder();
 
-	// @pre:    BST
-	// @post:   Printed out all the elements of the BST using levelorder traversal.
+	// @pre:    Leftist heap
+	// @post:   Printed out all the elements of the Leftist heap using levelorder traversal.
 	// @return: None
 	void levelorder();
 };

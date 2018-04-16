@@ -122,21 +122,5 @@ void SkewHeap::levelorder() {
 }
 
 void SkewHeap::levelorderHelper(Node *root) {
-    if (root != nullptr) {
-        // std::queue<Node*> queue;
-        // // Enqueue all nodes from level 0 to last level
-        // queue.push(root);
-        // while (!queue.empty()) {
-        //     Node *temp = queue.front();
-        //     // Print all leaves
-        //     if (temp->tag() == 1) {
-        //         std::cout << " " << temp->key();
-        //     }
-        //     queue.pop();
 
-        //     if (temp->left()  != nullptr) { queue.push(temp->first()); }
-        //     if (temp->second() != nullptr) { queue.push(temp->second()); }
-        //     if (temp->third()  != nullptr) { queue.push(temp->third()); }
-        // }
-    }
 }

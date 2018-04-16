@@ -4,13 +4,15 @@ File:   main.cpp
 Date:   4/9/2018
 */
 
+#include "LeftistHeap.h"
 #include "SkewHeap.h"
 #include <fstream>
 #include <iostream>
 
 int main(int argc, char **argv) {
 
-	SkewHeap *skew = nullptr;
+//    leftistHeap *leftist = nullptr;
+    LeftistHeap *leftist = nullptr;
 
 	// Reads values from a file
 	int value = -1;
@@ -20,12 +22,13 @@ int main(int argc, char **argv) {
 		std::cout << "Error reading the input file.\n";
 		inputFile.close();
 	} else {
-		skew  = new SkewHeap();
+		leftist = new LeftistHeap();
 		while(inputFile >> value) {
-			skew->insert(value);
+			leftist->insert(value);
 		}
 	}
 	inputFile.close();
+    leftist->levelorder(); //TODO remove
 
 	// User interacation
 	int choice = -1;
@@ -48,7 +51,7 @@ int main(int argc, char **argv) {
 			case 1:
 			std::cout << "Enter a number to be inserted: ";
 			std::cin >> inputValue;
-			if (!skew->insert(inputValue)) {
+			if (!leftist->insert(inputValue)) {
 				std::cout <<" Failed to insert " << inputValue << " .\n";
 			} else {
 				std::cout << inputValue << " has been inserted.\n";
@@ -56,34 +59,34 @@ int main(int argc, char **argv) {
 			break;
 			case 2:
 			{
-				if (skew->deleteMin()) {
+				if (leftist->deleteMin()) {
 					std::cout << "Min value has been deleted.\n"; //min->value() << "
 				} else {
 					std::cout << "An Error happened during deletion of min number.\n";
 				}
-				skew->inorder();
+				leftist->inorder();
 			}
 			break;
 			case 3:
 			// Print using preodrer traversal
-			skew->preorder();
+			leftist->preorder();
 			break;
 			case 4:
 			// Print using inodrer traversal
-			skew->inorder();
+			leftist->inorder();
 			break;
 			case 5:
 			// Print using postodrer traversal
-			skew->levelorder();
+			leftist->levelorder();
 			break;
 			case 6:
 			std::cout << "Bye bye!\n";
-			delete skew;
+			delete leftist;
 			return (0);
 			default:
 			std::cout << "\nError: Wrong input.\n\n";
 		}
 	}
-	delete skew;
+	delete leftist;
 	return (0);
 }
