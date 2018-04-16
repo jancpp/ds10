@@ -157,7 +157,7 @@ void LeftistHeap::levelorderHelper(Node *root) {
     int levels = 1;
     int newLevel = 0;
     if (root != nullptr) {
-         std::queue<Node*> queue;
+         Queue queue;
          // Enqueue all nodes from level 0 to last level
          queue.push(root);
         for (int i=0; i<m_size; i++) {
