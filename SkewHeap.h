@@ -46,6 +46,7 @@ private:
 public:
 	SkewHeap();
 	~SkewHeap();
+    void destroyNode(Node *node);
 
 	// @pre:    Binary search Heap
 	// @Post:   New node inserted into the Heap:    as root if empty,

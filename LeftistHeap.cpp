@@ -9,7 +9,15 @@
 LeftistHeap::LeftistHeap(): m_root(nullptr), m_size(0) {}
 
 LeftistHeap::~LeftistHeap() {
-    delete m_root;
+    destroyNode(m_root);
+}
+
+void LeftistHeap::destroyNode(Node *node) {
+    if (node != nullptr) {
+        destroyNode(node->left());
+        destroyNode(node->right());
+        delete node;
+    }
 }
 
 void LeftistHeap::setRoot(Node *root) {

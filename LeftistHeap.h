@@ -23,6 +23,7 @@ private:
 	bool deleteMaxHelper(Node *parent);
     void swap(Node *heap1, Node *heap2);
     void adjustRank(Node *heap);
+    void destroyNode(Node *node);
 //    Node *concat(Node *heap1, Node *heap2);
 
 	void setRoot(Node *root);

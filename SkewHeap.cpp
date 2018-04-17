@@ -7,7 +7,17 @@
 #include "SkewHeap.h"
 
 SkewHeap::SkewHeap(): m_root(nullptr), m_size(0) {}
-SkewHeap::~SkewHeap() {}
+SkewHeap::~SkewHeap() {
+    destroyNode(m_root);
+}
+
+void SkewHeap::destroyNode(Node *node) {
+    if (node != nullptr) {
+        destroyNode(node->left());
+        destroyNode(node->right());
+        delete node;
+    }
+}
 
 void SkewHeap::setRoot(Node *root) {
     m_root = root;
