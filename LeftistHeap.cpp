@@ -52,13 +52,14 @@ void LeftistHeap::adjustRank(Node *node) {
 }
 
 Node *LeftistHeap::concate(Node *heap1, Node *heap2) {
-    levelorder();
+//    levelorder();
 	if (heap1 == nullptr) {
 		return heap2;
 	} else if (heap2 == nullptr) {
 		return heap1; 		
     } else if (heap1->key() > heap2->key()) {
         concate(heap2, heap1);
+        return heap2;
     }
     heap1->setRight(concate(heap1->right(), heap2));
     adjustRank(heap1);
@@ -154,33 +155,101 @@ void LeftistHeap::levelorder() {
 }
 
 void LeftistHeap::levelorderHelper(Node *root) {
-    int levels = 1;
-    int newLevel = 0;
-    if (root != nullptr) {
-         Queue queue;
-         // Enqueue all nodes from level 0 to last level
-         queue.push(root);
-        for (int i=0; i<m_size; i++) {
-             Node *temp = queue.front();
-             // Print all nodes
-             std::cout << " " << temp->key();
-             queue.pop();
-
-             if (temp->left()  != nullptr) {
-                 queue.push(temp->left());
-             }
-             if (temp->right() != nullptr) {
-                 queue.push(temp->right());
-             }
-//             std::cout << "\n";
-             
-             if ((newLevel == i) && ((i%2 == 0) || (i == 2))) {
-                 std::cout << "\n";
-                 newLevel += pow(2, levels);
-//                 std::cout << " .." << levels;
-                 levels++;
-             }
-         }
+    
+    
+    if (!m_root) {
+        return;
     }
+    Queue *q = new Queue();
+        q->push(m_root);
+        while (1){
+            int nodeCount = q->size();
+            if (nodeCount == 0) {
+                break;
+            }
+            while (nodeCount > 0) {
+                Node * temp = q->front();
+                std::cout << " " << temp->key();
+                q->pop();
+                if (temp->left()  != nullptr) {
+                    q->push(temp->left());
+                }
+                if (temp->right() != nullptr) {
+                    q->push(temp->right());
+                }
+                nodeCount--;
+            }
+            std::cout << "\n";
+        }
+    }
+    
+//
+//
+//    Node * temp = q->peek();
+//    q->pop();
+//    std::cout << " " << temp->key();
+//    std::cout << "\n";
+//    while (!q->isEmpty()){
+//         if (temp->left()  != nullptr) {
+//             q->push(temp->left());
+//             std::cout << " " << temp->key();
+//         }
+//         if (temp->right() != nullptr) {
+//             q->push(temp->right());
+//             std::cout << " " << temp->key();
+//         }
+//        std::cout << "\n";
+//    }
+//}
+//    int levels = 1;
+//    std::cout << "\n\nL" << levels << ": ";
+//    int newLevel = 0;
+//    if (root != nullptr) {
+//         Queue queue;
+//         // Enqueue all nodes from level 0 to last level
+//         queue.push(root);
+//
+//        for (int i=0; i<m_size; i++) {
+//            The jth child of A[i] is at A[5i+j], 1<= j <=5, if it exists.
+//
+//             Node *temp = queue.front();
+////             // Print all nodes
+//             std::cout << " " << temp->key();
+//             queue.pop();
+            
+            // push children
+            // new level
+            //recurse
+//            while ((temp->left() != nullptr) && (temp->right() != nullptr)){
+//             if (temp->left()  != nullptr) {
+//                 queue.push(temp->left());
+//             }
+//             if (temp->right() != nullptr) {
+//                 queue.push(temp->right());
+//             }
+//            std::cout << "\n";
+//
+//            temp = temp->left();
+//            }
+            
+            
+            
+            
+//             if (temp->left()  != nullptr) {
+//                 queue.push(temp->left());
+//             }
+//             if (temp->right() != nullptr) {
+//                 queue.push(temp->right());
+//             }
+////             std::cout << "\n";
+//
+//             if ((newLevel == i) && ((i%2 == 0) || (i == 2))) {
+//                 std::cout << "\n";
+//                 newLevel += pow(2, levels);
+//                 levels++;
+//                 std::cout << "L" << levels << ": ";
+//             }
+//         }
+//    }
 
-}
+//}

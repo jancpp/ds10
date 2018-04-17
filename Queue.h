@@ -23,6 +23,7 @@ public:
     Node *pop();
     void push(Node *newNode);
     Node *front();
+    int size();
 };
 #endif
 

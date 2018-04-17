@@ -27,9 +27,16 @@ Node *Queue::pop(){
     m_size--;
     return temp;
 }
+
 void Queue::push(Node *newNode) {
     m_array[m_size] = newNode;
+    m_size++;
 }
+
 Node *Queue::front() {
     return m_array[0];
+}
+
+int Queue::size() {
+    return m_size;
 }

@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
 		leftist = new LeftistHeap();
 		while(inputFile >> value) {
 			leftist->insert(value);
+            leftist->levelorder();
 		}
 	}
 	inputFile.close();
