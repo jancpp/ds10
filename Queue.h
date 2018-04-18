@@ -8,11 +8,12 @@
 #define QUEUE_H
 
 #include "Node.h"
+#include <iostream>
 
 class Queue
 {
 private:
-    int m_size = 0;
+    int m_size;
     Node **m_array = new Node*[500];
     
 public:

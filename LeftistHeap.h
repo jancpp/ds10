@@ -4,7 +4,6 @@ File:   LeftistHeap.h
 Date:   4/9/2018
 */
 
-
 #ifndef LEFTIST_HEAP_H
 #define LEFTIST_HEAP_H
 
@@ -18,15 +17,21 @@ class LeftistHeap {
 private:
 	Node *m_root;
 	int m_size;
-
-	bool deleteMinHelper(Node *parent);
-	bool deleteMaxHelper(Node *parent);
+    
+    // @pre:    Two heaps
+    // @post:   Swapped heaps
+    // @return: None
     void swap(Node *heap1, Node *heap2);
+    
+    // @pre:    Leftist heap
+    // @post:   Node is destroyed
+    // @return: None
     void adjustRank(Node *heap);
-    void destroyNode(Node *node);
-//    Node *concat(Node *heap1, Node *heap2);
-
-	void setRoot(Node *root);
+    
+    // @pre:    Leftist heap
+    // @post:   Heap is recursively destroyed
+    // @return: None
+    void destroyHeap(Node *node);;
 
 	// @pre:    Leftist heap
 	// @post:   Heaps merged into one
@@ -48,31 +53,19 @@ private:
 	// @return: None
 	void levelorderHelper(Node *root);
 
-	// @pre:    Leftist heap
-	// @post:   Serching in root
-	// @return: Node pointer of element to be found
-	Node *findMinHelper(Node *root);
-
-	// @pre:    Leftist heap
-	// @post:   Searching in root
-	// @return: Node pointer of element to be found
-	Node *findMaxHelper(Node *root);
-
-	// @pre:    Leftist heap
-	// @post:   deleted node from the Heap
-	// @return: True if deleted, false otherwise
-	bool deleteHelper(int value, Node *root);
-
 public:
 	LeftistHeap();
 	~LeftistHeap();
 
-	// @pre:    Binary search Heap
-	// @Post:   New node inserted into the Heap:    as root if empty,
-	//                                              as left node if value is smaller then root value
-	//                                              as right node if value is same or larger then root
-	// @Return: True if success, false otherwise
-	bool insert(int value);
+    // @pre:    None
+    // @post:   Runs program for leftist heap
+    // @return: None
+    void run(LeftistHeap *leftist);
+    
+    // @pre:    Leftist Heap
+    // @post:   New node inserted into the heap
+    // @return: True if success, false otherwise
+    bool insert(int value);
 
 	// @pre:    Leftist heap
 	// @post:   deleted min value

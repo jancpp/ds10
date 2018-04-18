@@ -12,12 +12,13 @@ Node::Node() : m_left (nullptr ), m_right (nullptr ){
 }
 
 Node::~Node() {
-    if (right() != nullptr) {
-        delete right();
-    }
-    if (left() != nullptr) {
-        delete left();
-    }
+//    if (this->right() != nullptr) {
+//        delete right();
+//    }
+//    if (this->left() != nullptr) {
+//        delete left();
+//    }
+//    delete this;
 }
 
 Node::Node(const int &rank, const int &key, Node *left , Node *right ) {

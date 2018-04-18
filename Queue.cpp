@@ -6,6 +6,7 @@
 
 #include "Queue.h"
 
+
 Queue::Queue(): m_size(0) {
     for (int i=0; i<500; i++) {
         m_array[i] = nullptr;

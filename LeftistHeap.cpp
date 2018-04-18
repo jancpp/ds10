@@ -5,23 +5,100 @@
  */
 
 #include "LeftistHeap.h"
+#include <fstream>
 
 LeftistHeap::LeftistHeap(): m_root(nullptr), m_size(0) {}
 
 LeftistHeap::~LeftistHeap() {
-    destroyNode(m_root);
+    destroyHeap(m_root);
 }
 
-void LeftistHeap::destroyNode(Node *node) {
-    if (node != nullptr) {
-        destroyNode(node->left());
-        destroyNode(node->right());
-        delete node;
+void LeftistHeap::run(LeftistHeap *leftist) {
+    
+    // Reads values from a file
+    int value = -1;
+    std::ifstream inputFile;
+    inputFile.open("data.txt");
+    if (!inputFile) {
+        std::cout << "Error reading the input file.\n";
+        inputFile.close();
+    } else {
+        std::cout << "Leftist heap:\ndata.txt elements: ";
+        while(inputFile >> value) {
+            std::cout << value << " ";
+            leftist->insert(value);
+        }
+        std::cout << "\n";
+    }
+    inputFile.close();
+    
+    // User interacation
+    int choice = -1;
+    int inputValue = 0;
+    
+    while (choice != 6) {
+        std::cout << "\n............................................\n\n";
+        std::cout << "Please choose one of the following commands:\n\n";
+        std::cout << "1- insert\n\n";
+        std::cout << "2- deletemin\n\n";
+        std::cout << "3- preorder\n\n";
+        std::cout << "4- inorder\n\n";
+        std::cout << "5- levelorder\n\n";
+        std::cout << "6- exit\n\n";
+        
+        std::cout << "> ";
+        std::cin >> choice;
+        
+        switch (choice) {
+            case 1:
+                // Insert a value
+                std::cout << "Enter a number to be inserted: ";
+                std::cin >> inputValue;
+                if (!leftist->insert(inputValue)) {
+                    std::cout <<" Failed to insert " << inputValue << " .\n";
+                } else {
+                    std::cout << inputValue << " has been inserted.\n";
+                }
+                break;
+            case 2:
+            {
+                // Delete min number
+                if (leftist->deleteMin()) {
+                    std::cout << "Min value has been deleted.\n";
+                } else {
+                    std::cout << "An Error happened during deletion of min number.\n";
+                }
+            }
+                break;
+            case 3:
+                // Print using preodrer traversal
+                leftist->preorder();
+                break;
+            case 4:
+                // Print using inodrer traversal
+                leftist->inorder();
+                break;
+            case 5:
+                // Print using levelodrer traversal
+                leftist->levelorder();
+                break;
+            case 6:
+                // Exit
+                std::cout << "Bye bye!\n";
+                break;
+            default:
+                std::cout << "\nError: Wrong input.\n\n";
+        }
     }
 }
 
-void LeftistHeap::setRoot(Node *root) {
-    m_root = root;
+void LeftistHeap::destroyHeap(Node *node) {
+    if (node != nullptr) {
+        destroyHeap(node->left());
+        destroyHeap(node->right());
+        delete node;
+        m_size--;
+    }
 }
 
 bool LeftistHeap::insert(int key) {
@@ -36,21 +113,6 @@ bool LeftistHeap::insert(int key) {
     return inserted;
 }
 
-//Node *LeftistHeap::insertHelper(Node *root, Node *newNode) {
-//    // Base case - empty Heap
-//    if ( root == nullptr) {
-//        return newNode;
-//    } else if (newNode->key() < root->key()) {
-//        Node *temp = new Node();
-//        temp = insertHelper(root->left(), newNode);
-//        root->setLeft(temp);
-//    } else {
-//        Node *temp = new Node();
-//        temp = insertHelper(root->right(), newNode);
-//        root->setRight(temp);
-//    }
-//    return root;
-//}
 void LeftistHeap::adjustRank(Node *node) {
     if ((node->left() == nullptr) && (node->left() == nullptr)) {
         node->setRank(1);
@@ -60,7 +122,6 @@ void LeftistHeap::adjustRank(Node *node) {
 }
 
 Node *LeftistHeap::concate(Node *heap1, Node *heap2) {
-//    levelorder();
 	if (heap1 == nullptr) {
 		return heap2;
 	} else if (heap2 == nullptr) {
@@ -83,49 +144,16 @@ bool LeftistHeap::deleteMin() {
     } else {
         Node *left = m_root->left();
         Node *right = m_root->right();
-        delete m_root;
-        concate(left, right);
+        m_root = concate(left, right);
         return true;
     }
-}
-
-bool LeftistHeap::deleteMinHelper(Node *parent) {
-    bool deleted = false;
-//    if (m_size == 1){
-//        delete m_root;
-//        m_root = nullptr;
-//        deleted = true;
-//        m_size--;
-//    } else if ((parent->right() == nullptr) && (parent->left() != nullptr) && (parent->left()->left() == nullptr) && (parent->left()->right() == nullptr)) {
-//        delete parent->left();
-//        parent->setLeft(nullptr);
-//        deleted = true;
-//        m_size--;
-//    } else if (parent->left() == nullptr) {
-//        setRoot(parent->right());
-//        deleted = true;
-//        m_size--;
-//    }
-//    else if ((parent->left()->left() == nullptr) && (parent->left()->right() != nullptr)) {
-//        parent->setLeft(parent->left()->right());
-//        deleted = true;
-//        m_size--;
-//    }
-//    else if ((parent->left()->left() == nullptr) && (parent->left()->right() == nullptr)) {
-//        delete parent->left();
-//        parent->setLeft(nullptr);
-//        deleted = true;
-//        m_size--;
-//    }else {
-//        return deleteMinHelper(parent->left());
-//    }
-    return deleted;
 }
 
 void LeftistHeap::preorder() {
     if (m_root == nullptr) {
         std::cout << "Heap is empty.\n";
     } else {
+        std::cout << "Preorder:\n";
         preorderHelper(m_root);
     }
 }
@@ -142,6 +170,7 @@ void LeftistHeap::inorder() {
     if (m_root == nullptr) {
         std::cout << "Heap is empty.\n";
     } else {
+        std::cout << "Inorder:\n";
         inorderHelper(m_root);
     }
 }
@@ -163,11 +192,10 @@ void LeftistHeap::levelorder() {
 }
 
 void LeftistHeap::levelorderHelper(Node *root) {
-    
-    
     if (!m_root) {
         return;
     }
+    std::cout << "Level order:\n";
     Queue *q = new Queue();
         q->push(m_root);
         while (1){
@@ -190,74 +218,3 @@ void LeftistHeap::levelorderHelper(Node *root) {
             std::cout << "\n";
         }
     }
-    
-//
-//
-//    Node * temp = q->peek();
-//    q->pop();
-//    std::cout << " " << temp->key();
-//    std::cout << "\n";
-//    while (!q->isEmpty()){
-//         if (temp->left()  != nullptr) {
-//             q->push(temp->left());
-//             std::cout << " " << temp->key();
-//         }
-//         if (temp->right() != nullptr) {
-//             q->push(temp->right());
-//             std::cout << " " << temp->key();
-//         }
-//        std::cout << "\n";
-//    }
-//}
-//    int levels = 1;
-//    std::cout << "\n\nL" << levels << ": ";
-//    int newLevel = 0;
-//    if (root != nullptr) {
-//         Queue queue;
-//         // Enqueue all nodes from level 0 to last level
-//         queue.push(root);
-//
-//        for (int i=0; i<m_size; i++) {
-//            The jth child of A[i] is at A[5i+j], 1<= j <=5, if it exists.
-//
-//             Node *temp = queue.front();
-////             // Print all nodes
-//             std::cout << " " << temp->key();
-//             queue.pop();
-            
-            // push children
-            // new level
-            //recurse
-//            while ((temp->left() != nullptr) && (temp->right() != nullptr)){
-//             if (temp->left()  != nullptr) {
-//                 queue.push(temp->left());
-//             }
-//             if (temp->right() != nullptr) {
-//                 queue.push(temp->right());
-//             }
-//            std::cout << "\n";
-//
-//            temp = temp->left();
-//            }
-            
-            
-            
-            
-//             if (temp->left()  != nullptr) {
-//                 queue.push(temp->left());
-//             }
-//             if (temp->right() != nullptr) {
-//                 queue.push(temp->right());
-//             }
-////             std::cout << "\n";
-//
-//             if ((newLevel == i) && ((i%2 == 0) || (i == 2))) {
-//                 std::cout << "\n";
-//                 newLevel += pow(2, levels);
-//                 levels++;
-//                 std::cout << "L" << levels << ": ";
-//             }
-//         }
-//    }
-
-//}
