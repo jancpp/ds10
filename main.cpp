@@ -8,18 +8,24 @@ Date:   4/9/2018
 #include "SkewHeap.h"
 #include <iostream>
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     std::string heaptype = argv[1];
-    if (heaptype == "leftist") {
+    if (heaptype == "leftist")
+    {
         LeftistHeap *leftist = new LeftistHeap();
         leftist->run(leftist);
         delete leftist;
-    } else if (heaptype == "skew") {
+    }
+    else if (heaptype == "skew")
+    {
         SkewHeap *skew = new SkewHeap();
         skew->run(skew);
         delete skew;
-    } else {
+    }
+    else
+    {
         std::cout << "\nWrong input, choose\n./Lab10 leftist\n or\n ./Lab10 skew\n";
     }
-	return (0);
+    return (0);
 }

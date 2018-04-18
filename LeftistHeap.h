@@ -12,31 +12,33 @@ Date:   4/9/2018
 #include "Queue.h"
 #include <math.h>
 
-class LeftistHeap {
+class LeftistHeap
+{
 
 private:
 	Node *m_root;
 	int m_size;
-    
-    // @pre:    Two heaps
-    // @post:   Swapped heaps
-    // @return: None
-    void swap(Node *heap1, Node *heap2);
-    
-    // @pre:    Leftist heap
-    // @post:   Node is destroyed
-    // @return: None
-    void adjustRank(Node *heap);
-    
-    // @pre:    Leftist heap
-    // @post:   Heap is recursively destroyed
-    // @return: None
-    void destroyHeap(Node *node);;
+
+	// @pre:    Two heaps
+	// @post:   Swapped heaps
+	// @return: None
+	void swap(Node *heap1, Node *heap2);
+
+	// @pre:    Leftist heap
+	// @post:   Node is destroyed
+	// @return: None
+	void adjustRank(Node *heap);
+
+	// @pre:    Leftist heap
+	// @post:   Heap is recursively destroyed
+	// @return: None
+	void destroyHeap(Node *node);
+	;
 
 	// @pre:    Leftist heap
 	// @post:   Heaps merged into one
 	// @return: Node pointer of root of merged heaps
-    Node *concate(Node *heap1, Node *heap2);
+	Node *concate(Node *heap1, Node *heap2);
 
 	// @pre:    Leftist heap
 	// @post:   Printed values in preorder traversal
@@ -57,15 +59,15 @@ public:
 	LeftistHeap();
 	~LeftistHeap();
 
-    // @pre:    None
-    // @post:   Runs program for leftist heap
-    // @return: None
-    void run(LeftistHeap *leftist);
-    
-    // @pre:    Leftist Heap
-    // @post:   New node inserted into the heap
-    // @return: True if success, false otherwise
-    bool insert(int value);
+	// @pre:    None
+	// @post:   Runs program for leftist heap
+	// @return: None
+	void run(LeftistHeap *leftist);
+
+	// @pre:    Leftist Heap
+	// @post:   New node inserted into the heap
+	// @return: True if success, false otherwise
+	bool insert(int value);
 
 	// @pre:    Leftist heap
 	// @post:   deleted min value
