@@ -14,7 +14,7 @@ class Queue
 {
 private:
   int m_size;
-  Node **m_array = new Node *[500];
+  Node *m_array[500];
 
 public:
   Queue();

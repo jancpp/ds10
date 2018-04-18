@@ -11,7 +11,7 @@ SkewHeap.o: SkewHeap.h SkewHeap.cpp Node.cpp Node.h Queue.cpp Queue.h
 LeftistHeap.o: LeftistHeap.h LeftistHeap.cpp Node.cpp Node.h Queue.cpp Queue.h
 	g++ -g -std=c++11 -Wall -c LeftistHeap.cpp
 
-Queue: Queue.cpp Queue.h
+Queue.o: Queue.cpp Queue.h
 	g++ -g -std=c++11 -Wall -c Queue.cpp
 
 Node.o: Node.cpp Node.h
