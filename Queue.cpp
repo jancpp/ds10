@@ -1,6 +1,6 @@
 /*
  Author: Jan Polzer
- File:   Queue.h\cpp
+ File:   Queue.cpp
  Date:   4/9/2018
  */
 
@@ -13,7 +13,8 @@ Queue::Queue() : m_size(0)
         m_array[i] = nullptr;
     }
 }
-Queue::~Queue() {}
+Queue::~Queue() {
+}
 
 bool Queue::isEmpty()
 {

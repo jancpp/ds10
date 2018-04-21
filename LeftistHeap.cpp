@@ -112,6 +112,8 @@ void LeftistHeap::destroyHeap(Node *node)
     {
         destroyHeap(node->left());
         destroyHeap(node->right());
+        node->setLeft(nullptr);
+        node->setRight(nullptr);
         delete node;
         m_size--;
     }
@@ -273,4 +275,5 @@ void LeftistHeap::levelorderHelper(Node *root)
         }
         std::cout << "\n";
     }
+    delete q;
 }

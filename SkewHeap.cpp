@@ -258,4 +258,5 @@ void SkewHeap::levelorderHelper(Node *root)
         }
         std::cout << "\n";
     }
+    delete q;
 }
